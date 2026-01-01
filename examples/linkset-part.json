@@ -1,0 +1,54 @@
+{
+  "$schema": "https://specworks.org/schemas/part/1.0",
+  "linkset": [
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://www.rfc-editor.org/rfc/rfc9264.html",
+      "rel": "https://specworks.org/rels/specification",
+      "type": "text/html",
+      "title": "Linkset: Media Types and a Link Relation Type for Link Sets"
+    },
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://www.rfc-editor.org/rfc/rfc8288.html",
+      "rel": "https://specworks.org/rels/specification",
+      "type": "text/html",
+      "title": "Web Linking"
+    },
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://www.nuget.org/packages/SpecWorks.Linkset",
+      "rel": "https://specworks.org/rels/library",
+      "type": "application/vnd.nuget.package",
+      "title": "Linkset library for .NET"
+    },
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://pypi.org/project/specworks-linkset",
+      "rel": "https://specworks.org/rels/library",
+      "type": "application/vnd.pypi.package",
+      "title": "Linkset library for Python"
+    },
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://github.com/spec-works/linkset/actions",
+      "rel": "https://specworks.org/rels/tests",
+      "type": "text/html",
+      "title": "Continuous Integration Test Results"
+    },
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://github.com/spec-works/linkset/blob/main/README.md",
+      "rel": "describedby",
+      "type": "text/markdown",
+      "title": "README documentation"
+    },
+    {
+      "anchor": "https://github.com/spec-works/linkset",
+      "href": "https://github.com/spec-works/linkset/blob/main/dotnet/README.md",
+      "rel": "https://specworks.org/rels/example",
+      "type": "text/markdown",
+      "title": "Usage examples"
+    }
+  ]
+}

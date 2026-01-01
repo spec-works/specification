@@ -1,0 +1,22 @@
+{
+  "linkset": [
+    {
+      "href": "https://www.rfc-editor.org/rfc/rfc9264.html",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Linkset: Media Types and a Link Relation Type for Link Sets"
+    },
+    {
+      "href": "https://www.rfc-editor.org/rfc/rfc8288.html",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Web Linking"
+    },
+    {
+      "href": "https://github.com/xregistry/spec",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "xRegistry Specification"
+    }
+  ]
+}
