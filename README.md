@@ -385,13 +385,8 @@ Factories MAY:
 - [xRegistry] xRegistry Specification
 - [IANA Link Relations] IANA Link Relation Types Registry
 
-## Appendix A: Example Factory
 
-See the SpecWorks reference implementation at:
-- Registry: https://registry.specworks.org/
-- Source: https://github.com/spec-works/.github
-
-## Appendix B: Creating Your Own Factory
+## Appendix A: Creating Your Own Factory
 
 To create your own factory:
 
