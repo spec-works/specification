@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$comment": "RFC 9264 Linkset format - Specification references for SpecWorks components",
+  "linkset": [
+    {
+      "anchor": "#primary-specification",
+      "href": "https://www.rfc-editor.org/rfc/rfcXXXX.html",
+      "type": "text/html",
+      "rel": "describedby",
+      "title": "RFC XXXX - [Specification Title]",
+      "hreflang": "en"
+    },
+    {
+      "anchor": "#primary-specification-txt",
+      "href": "https://www.rfc-editor.org/rfc/rfcXXXX.txt",
+      "type": "text/plain",
+      "rel": "describedby",
+      "title": "RFC XXXX - [Specification Title] (Plain Text)"
+    },
+    {
+      "anchor": "#related-specification",
+      "href": "https://www.rfc-editor.org/rfc/rfcYYYY.html",
+      "type": "text/html",
+      "rel": "related",
+      "title": "RFC YYYY - [Related Specification Title]"
+    },
+    {
+      "anchor": "#iana-registry",
+      "href": "https://www.iana.org/assignments/[registry-name]/[registry-name].xhtml",
+      "type": "text/html",
+      "rel": "related",
+      "title": "IANA [Registry Name] Registry"
+    },
+    {
+      "anchor": "#errata",
+      "href": "https://www.rfc-editor.org/errata_search.php?rfc=XXXX",
+      "type": "text/html",
+      "rel": "related",
+      "title": "RFC XXXX Errata"
+    },
+    {
+      "anchor": "#reference-website",
+      "href": "https://[official-website].org/",
+      "type": "text/html",
+      "rel": "related",
+      "title": "[Technology] Official Website"
+    },
+    {
+      "anchor": "#test-suite",
+      "href": "https://github.com/[organization]/[test-suite-repo]",
+      "type": "text/html",
+      "rel": "related",
+      "title": "Official [Technology] Test Suite"
+    },
+    {
+      "anchor": "#reference-implementation",
+      "href": "https://github.com/[organization]/[reference-impl]",
+      "type": "text/html",
+      "rel": "related",
+      "title": "Reference Implementation"
+    }
+  ]
+}
+
+{
+  "_comment": "TEMPLATE USAGE NOTES - Remove this entire JSON object when creating actual specs.json",
+
+  "_required": {
+    "description": "At minimum, include the primary specification with rel='describedby'",
+    "example": "RFC, W3C Recommendation, ISO Standard, IETF Draft"
+  },
+
+  "_anchor_field": {
+    "description": "Optional fragment identifier for documentation purposes",
+    "usage": "Use descriptive anchors like #primary-specification, #iana-registry",
+    "note": "Not required but improves readability"
+  },
+
+  "_href_field": {
+    "description": "URL to the specification or related resource",
+    "must_be": "Stable, authoritative URL",
+    "examples": [
+      "RFC HTML: https://www.rfc-editor.org/rfc/rfcXXXX.html",
+      "RFC TXT: https://www.rfc-editor.org/rfc/rfcXXXX.txt",
+      "W3C: https://www.w3.org/TR/[spec-name]/",
+      "ISO: https://www.iso.org/standard/[number].html",
+      "IETF Draft: https://datatracker.ietf.org/doc/html/draft-[name]"
+    ]
+  },
+
+  "_type_field": {
+    "description": "MIME type of the linked resource",
+    "common_values": [
+      "text/html",
+      "text/plain",
+      "application/pdf",
+      "application/xml"
+    ]
+  },
+
+  "_rel_field": {
+    "description": "Relationship between this resource and the specifications",
+    "describedby": "The primary specification this component implements (REQUIRED, use once)",
+    "related": "Supporting specifications, registries, test suites, etc.",
+    "cite": "Alternative to 'describedby' for academic citations",
+    "note": "Use standard IANA link relations when possible"
+  },
+
+  "_title_field": {
+    "description": "Human-readable description of the link",
+    "should_include": "RFC/spec number and title for easy reference"
+  },
+
+  "_hreflang_field": {
+    "description": "Language of the linked resource (ISO 639-1 code)",
+    "common_values": ["en", "fr", "de", "ja"],
+    "note": "Optional but recommended for international specifications"
+  },
+
+  "_common_link_types": {
+    "rfc_html": {
+      "href": "https://www.rfc-editor.org/rfc/rfcXXXX.html",
+      "type": "text/html",
+      "rel": "describedby"
+    },
+    "rfc_txt": {
+      "href": "https://www.rfc-editor.org/rfc/rfcXXXX.txt",
+      "type": "text/plain",
+      "rel": "describedby"
+    },
+    "w3c_recommendation": {
+      "href": "https://www.w3.org/TR/[spec-name]/",
+      "type": "text/html",
+      "rel": "describedby"
+    },
+    "ietf_draft": {
+      "href": "https://datatracker.ietf.org/doc/html/draft-[name]",
+      "type": "text/html",
+      "rel": "describedby",
+      "note": "Include draft version number in title"
+    },
+    "iana_registry": {
+      "href": "https://www.iana.org/assignments/[name]/[name].xhtml",
+      "type": "text/html",
+      "rel": "related"
+    },
+    "rfc_errata": {
+      "href": "https://www.rfc-editor.org/errata_search.php?rfc=XXXX",
+      "type": "text/html",
+      "rel": "related"
+    }
+  },
+
+  "_examples_by_type": {
+    "RFC": {
+      "description": "For IETF RFC-based implementations",
+      "primary": "https://www.rfc-editor.org/rfc/rfcXXXX.html",
+      "related": [
+        "Errata page",
+        "IANA registries referenced in RFC",
+        "Superseded/updated RFCs"
+      ]
+    },
+    "W3C": {
+      "description": "For W3C Recommendation implementations",
+      "primary": "https://www.w3.org/TR/[spec-name]/",
+      "related": [
+        "Editor's draft",
+        "Test suite",
+        "Implementation report"
+      ]
+    },
+    "ISO": {
+      "description": "For ISO standard implementations",
+      "primary": "https://www.iso.org/standard/[number].html",
+      "note": "ISO specs may be paywalled; link anyway for reference"
+    },
+    "IETF_Draft": {
+      "description": "For IETF Internet-Draft implementations",
+      "primary": "https://datatracker.ietf.org/doc/html/draft-[name]-[version]",
+      "warning": "Drafts are not stable; include version number in title",
+      "note": "Consider waiting for RFC publication for production use"
+    }
+  },
+
+  "_validation_checklist": [
+    "[ ] Primary specification included with rel='describedby'",
+    "[ ] All URLs are valid and accessible",
+    "[ ] Titles include specification number/name",
+    "[ ] MIME types are correct",
+    "[ ] IANA registries linked (if applicable)",
+    "[ ] Errata page linked (if applicable for RFCs)",
+    "[ ] Related specifications included",
+    "[ ] No proprietary or unstable URLs",
+    "[ ] File saved at project root as 'specs.json'",
+    "[ ] JSON is valid (no trailing commas, proper syntax)"
+  ],
+
+  "_real_world_examples": {
+    "see_also": [
+      "spec-works/JsonDiff/specs.json - RFC 6902 (JSON Patch)",
+      "spec-works/vCard/specs.json - RFC 6350 (vCard)",
+      "spec-works/iCalendar/specs.json - RFC 5545 (iCalendar)",
+      "spec-works/linkset/specs.json - RFC 9264 (Linkset)",
+      "spec-works/RateLimiter/specs.json - IETF Draft"
+    ]
+  },
+
+  "_placement": {
+    "single_language_project": "Place at project root (e.g., project-name/specs.json)",
+    "multi_language_project": "Place at project root, NOT in language subdirectories"
+  },
+
+  "_conventions_reference": "See specification/CONVENTIONS.md for complete guidelines"
+}

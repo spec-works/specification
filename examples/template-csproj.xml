@@ -1,0 +1,168 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Target Frameworks - REQUIRED: Support both latest and LTS -->
+    <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
+
+    <!-- Language Features - REQUIRED -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Documentation - REQUIRED -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- NuGet Package Metadata - REQUIRED -->
+    <PackageId>[YourNamespace]</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>SpecWorks</Authors>
+    <Company>SpecWorks</Company>
+    <Description>[Brief description of the package - what specification it implements]</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/spec-works/[repository-name]</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/spec-works/[repository-name]</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>[tag1];[tag2];[tag3];rfc;specification;standards</PackageTags>
+
+    <!-- Source Link - REQUIRED for debugging support -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Optional: Strong naming (if required for your use case) -->
+    <!-- <SignAssembly>true</SignAssembly> -->
+    <!-- <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile> -->
+
+    <!-- Optional: Deterministic builds -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- Include README in package - REQUIRED -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Source Link Package - REQUIRED -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <!-- Production Dependencies -->
+  <!-- Add your actual package dependencies here -->
+  <ItemGroup>
+    <!-- Example: -->
+    <!-- <PackageReference Include="System.Text.Json" Version="10.0.0" /> -->
+  </ItemGroup>
+
+  <!-- Development/Testing Dependencies (for test projects) -->
+  <!-- Uncomment for test projects: -->
+  <!--
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  -->
+
+  <!-- Reference to main project (for test projects only) -->
+  <!-- Uncomment for test projects: -->
+  <!--
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\[ProjectName]\[ProjectName].csproj" />
+  </ItemGroup>
+  -->
+
+</Project>
+
+<!--
+TEMPLATE USAGE NOTES (Remove when creating actual project file)
+
+1. REQUIRED REPLACEMENTS:
+   - [YourNamespace]: Replace with actual namespace (e.g., SpecWorks.JsonDiff, VCard, ICalendar)
+   - [repository-name]: Replace with GitHub repository name
+   - [Brief description]: Replace with actual package description
+   - [tag1], [tag2], [tag3]: Replace with relevant tags (e.g., json, vcard, rfc6350)
+
+2. VERSION TARGETING:
+   - Always target: net10.0;net8.0 (latest + LTS)
+   - Update as new .NET versions are released
+   - See specification/adr/ for version policy
+
+3. NAMESPACE NAMING:
+   - SpecWorks-branded: SpecWorks.JsonDiff, SpecWorks.Linkset
+   - Standalone: VCard, ICalendar, MarkMyWord
+   - See CONVENTIONS.md for guidance
+
+4. SOURCE PROJECT vs TEST PROJECT:
+   - This template is for SOURCE projects by default
+   - For TEST projects:
+     * Remove NuGet package metadata section
+     * Uncomment test dependencies section
+     * Uncomment project reference section
+     * Update paths to reference source project
+
+5. DEPENDENCIES:
+   - Keep dependencies minimal
+   - Prefer standard library when possible
+   - Document dependency choices in ADR if non-obvious
+   - Pin major versions, allow minor/patch updates
+
+6. README INCLUSION:
+   - For single-language projects: README.md in dotnet/ directory
+   - For multi-language projects: Might need to adjust path to ../../README.md
+
+7. SOURCE LINK:
+   - Microsoft.SourceLink.GitHub enables debugging into your source
+   - Keep PrivateAssets="All" to avoid including in dependencies
+   - Update version as needed
+
+8. PACKAGE VERSION:
+   - Start at 1.0.0 for production-ready implementations
+   - Use 0.x.x for pre-release/beta versions
+   - Follow Semantic Versioning (SemVer) strictly
+
+9. OPTIONAL FEATURES (commented out):
+   - Strong naming: Only if required for specific scenarios
+   - Deterministic builds: Recommended for reproducible builds
+
+10. EXAMPLE PROJECT STRUCTURE:
+    dotnet/
+    ├── [ProjectName].sln
+    ├── src/
+    │   └── [ProjectName]/
+    │       ├── [ProjectName].csproj  ← This template
+    │       └── *.cs files
+    └── tests/
+        └── [ProjectName].Tests/
+            ├── [ProjectName].Tests.csproj  ← Modified template
+            └── *.cs test files
+
+11. COMPLIANCE:
+    This template follows SpecWorks conventions as defined in:
+    - specification/CONVENTIONS.md
+    - See ".NET Conventions" section
+
+12. VALIDATION CHECKLIST:
+    Before committing, verify:
+    - [ ] All [placeholder] values replaced
+    - [ ] Target frameworks are net10.0;net8.0
+    - [ ] Nullable enabled
+    - [ ] Documentation file generation enabled
+    - [ ] Source Link configured
+    - [ ] README.md path is correct
+    - [ ] PackageId matches namespace
+    - [ ] License is MIT
+    - [ ] Repository URLs are correct
+    - [ ] Package tags are relevant
+    - [ ] No warnings when building
+-->
