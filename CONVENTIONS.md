@@ -174,6 +174,45 @@ Enable Source Link for debugging:
 - **Explicit types** preferred over `var` in public examples
 - **XML documentation** on all public types and members
 
+### Command-Line Tools (CLI)
+
+All .NET CLI applications must be packaged and published as .NET tools to enable global installation via `dotnet tool install`.
+
+**Required configuration:**
+
+```xml
+<PropertyGroup>
+  <!-- .NET Tool Configuration -->
+  <PackAsTool>true</PackAsTool>
+  <ToolCommandName>commandname</ToolCommandName>
+
+  <!-- Standard NuGet package metadata (see above) -->
+  <PackageId>SpecWorks.ProjectName.Cli</PackageId>
+  <Version><!-- SemVer --></Version>
+  <!-- ... other metadata ... -->
+</PropertyGroup>
+```
+
+**Naming conventions:**
+- Package ID: `SpecWorks.<ProjectName>.Cli` (e.g., `SpecWorks.JsonDiff.Cli`)
+- Tool command: Lowercase, no prefixes (e.g., `jsondiff`, not `specworks-jsondiff`)
+- Assembly name: Match tool command for clarity
+
+**Installation experience:**
+```bash
+# Users should be able to install globally
+dotnet tool install --global SpecWorks.ProjectName.Cli
+
+# And then run with a simple command
+projectname [args]
+```
+
+**Rationale:**
+- Provides consistent installation experience across all SpecWorks CLI tools
+- Enables version management via `dotnet tool update`
+- Allows project-local installations via tool manifests
+- Integrates with standard .NET tooling ecosystem
+
 ---
 
 ## Documentation Standards
@@ -457,6 +496,7 @@ Use this checklist when creating a new SpecWorks component:
 - [ ] XML documentation generated
 - [ ] Source Link configured
 - [ ] NuGet metadata complete
+- [ ] CLI tools configured with PackAsTool (if applicable)
 
 **Documentation:**
 - [ ] README includes specification link
