@@ -22,16 +22,25 @@ The SpecWorks Factory specification defines a reproducible pattern for:
 ### 1.2 Goals
 
 - **Reproducibility**: Anyone can create their own factory following this pattern
-- **Discoverability**: Components can be found programmatically
-- **Traceability**: Clear links between components and their source specifications
-- **Consumability**: Components are published to standard package ecosystems
+- **Discoverability**: Parts can be found programmatically through specification-centric search
+- **Traceability**: Clear links between Parts and their source specifications
+- **Consumability**: Parts are published to standard package ecosystems
+- **Specification-Centric**: Discovery is organized around problems and specifications, not implementation languages
 
-### 1.3 Non-Goals
+### 1.3 Terminology
+
+- **Part**: A software component that implements one or more specifications to solve a specific problem space (e.g., "vCard" solves contact information representation by implementing RFC 6350)
+- **Implementation**: A language-specific realization of a Part (e.g., vCard's .NET implementation, Python implementation)
+- **Specification Version**: The version of the specification being implemented (e.g., RFC 6350 v4.0) - this is the primary version identifier for a Part
+- **Implementation Version**: The artifact version of a specific language implementation (e.g., NuGet package v1.2.0) - these may differ across languages
+
+### 1.4 Non-Goals
 
 This specification does NOT prescribe:
-- How components are generated (manual, AI-assisted, or otherwise)
+- How Parts are generated (manual, AI-assisted, or otherwise)
 - Programming languages or frameworks
-- Project structures or build systems
+- Repository organization (mono-repo vs. multi-repo)
+- Project structures or build systems (beyond general patterns)
 - Testing methodologies
 - Code style or quality metrics
 
@@ -40,43 +49,110 @@ This specification does NOT prescribe:
 A SpecWorks Factory consists of three primary elements:
 
 ```
-┌─────────────────────────────────────────┐
-│         SpecWorks Factory                │
-│                                          │
-│  ┌────────────────────────────────┐    │
-│  │      xRegistry Instance         │    │
-│  │   (Factory Inventory/Catalog)   │    │
-│  │                                  │    │
-│  │  Resource Type: "part"          │    │
-│  │  Format: application/linkset+json│    │
-│  └────────────────────────────────┘    │
-│              │                           │
-│              ↓                           │
-│  ┌────────────────────────────────┐    │
-│  │     Factory Parts (Components)  │    │
-│  │                                  │    │
-│  │  Each part is described by a    │    │
-│  │  linkset document that relates: │    │
-│  │  - Specifications                │    │
-│  │  - Published packages            │    │
-│  │  - Tests                         │    │
-│  │  - Documentation                 │    │
-│  └────────────────────────────────┘    │
-│                                          │
-└─────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│              SpecWorks Factory                        │
+│                                                       │
+│  ┌────────────────────────────────────────────┐     │
+│  │        xRegistry Instance                   │     │
+│  │     (Factory Inventory/Catalog)             │     │
+│  │                                              │     │
+│  │  Resource Type: "part"                      │     │
+│  │  Format: application/linkset+json           │     │
+│  │                                              │     │
+│  │  Each Part entry represents one problem     │     │
+│  │  space with specification version and       │     │
+│  │  links to available implementations         │     │
+│  └────────────────────────────────────────────┘     │
+│                    │                                  │
+│                    ↓                                  │
+│  ┌────────────────────────────────────────────┐     │
+│  │          Factory Parts                      │     │
+│  │                                              │     │
+│  │  Each Part:                                 │     │
+│  │  - Addresses one problem space              │     │
+│  │  - Implements one or more specifications    │     │
+│  │  - Has linkset describing:                  │     │
+│  │    • Specifications (with versions)         │     │
+│  │    • Libraries (multiple languages)         │     │
+│  │    • Tests                                  │     │
+│  │    • Documentation                          │     │
+│  │  - May have multiple implementations        │     │
+│  │    (.NET, Python, Rust, etc.)               │     │
+│  └────────────────────────────────────────────┘     │
+│                                                       │
+└──────────────────────────────────────────────────────┘
+
+Discovery Model (Specification-Centric):
+Developer → IDE Agent → xRegistry Query → Find Part by Problem
+                                               ↓
+                                    Part: "vCard (RFC 6350 v4.0)"
+                                    Available: .NET, Python, Rust
+                                               ↓
+                                    Select/Request Implementation
 ```
 
 ### 2.1 xRegistry Instance
 
-The factory MUST maintain an xRegistry instance that serves as the catalog of all factory parts.
+The factory MUST maintain an xRegistry instance that serves as the catalog of all factory Parts. Parts are indexed by problem space and specification, not by implementation language.
 
 ### 2.2 Factory Parts
 
-Each component produced by the factory is called a "Part". Parts are cataloged as resources in the xRegistry.
+Each Part produced by the factory addresses a specific problem space by implementing one or more specifications. A Part may have multiple language implementations (e.g., .NET, Python, Rust), but is cataloged as a single entry in xRegistry.
+
+**Key Characteristics:**
+- **Problem-Centric**: Named after the problem space or specification (e.g., "vCard", not "vCard-dotnet")
+- **Specification-Versioned**: Primary version is the specification version (e.g., RFC 6350 v4.0)
+- **Multi-Implementation**: May contain implementations in multiple languages, each with independent artifact versions
+- **Independent Lifecycle**: Evolves based on its specification's lifecycle, not the factory's lifecycle
 
 ### 2.3 Part Descriptors
 
-Each Part MUST be described by a linkset document (application/linkset+json, RFC 9264) that uses the link relations defined in Section 4.
+Each Part MUST be described by a linkset document (application/linkset+json, RFC 9264) that uses the link relations defined in Section 4. A single Part linkset includes:
+- Link(s) to specification(s) (REQUIRED)
+- Link(s) to library artifacts in one or more languages (REQUIRED - at least one)
+- Link(s) to tests (REQUIRED)
+- Link(s) to documentation (REQUIRED)
+
+### 2.4 Factory Organization
+
+While this specification does not mandate a specific repository organization, the following patterns are recommended:
+
+**Multi-Repository Pattern** (Recommended):
+- Each Part has its own repository (e.g., `github.com/factory-org/vCard`)
+- Shared factory infrastructure in separate repositories:
+  - Factory pattern documentation and templates
+  - Reusable CI/CD workflows
+- Enables parallel AI-agent operations on different Parts
+- See [ADR 0001](adr/0001-multi-repo-organization.md) for detailed rationale
+
+**Repository Contents** (per Part):
+```
+vCard/                  # Part repository
+├── README.md          # Problem space and specification overview
+├── specs.json         # Part linkset descriptor
+├── testcases/         # Shared test fixtures across implementations
+├── dotnet/            # .NET implementation
+├── python/            # Python implementation (if exists)
+└── rust/              # Rust implementation (if exists)
+```
+
+## 2.5 Using the xRegistry
+
+The SpecWorks Factory maintains a public xRegistry at **https://spec-works.github.io/registry/**
+
+**Quick Start:**
+```bash
+# List all parts
+curl https://spec-works.github.io/registry/parts/ | jq .
+
+# Get specific part
+curl https://spec-works.github.io/registry/parts/vcard/ | jq .
+
+# Get part linkset (specs.json)
+curl https://spec-works.github.io/registry/parts/vcard/versions/1.0.0/part.json | jq .
+```
+
+For complete usage documentation, see [REGISTRY.md](REGISTRY.md).
 
 ## 3. Requirements
 
@@ -85,6 +161,8 @@ Each Part MUST be described by a linkset document (application/linkset+json, RFC
 A SpecWorks Factory MUST:
 
 1. **Maintain an xRegistry instance** that catalogs all parts
+   - **SpecWorks Registry**: https://spec-works.github.io/registry/
+   - See [REGISTRY.md](REGISTRY.md) for usage guide
 2. **Define a resource type** for parts with media type `application/linkset+json`
 3. **Use the link relations** defined in Section 4
 4. **Be publicly accessible** (the xRegistry instance must be queryable)
@@ -390,15 +468,47 @@ Factories MAY:
 
 To create your own factory:
 
-1. Choose a domain name (e.g., `mycompany-specs.org`)
-2. Deploy an xRegistry instance
-3. Configure the resource type for Parts
-4. Create components that implement specifications
-5. Register Parts in your xRegistry
-6. Ensure each Part satisfies the requirements in Section 3.2
+1. **Bootstrap Your Factory**
+   - Create a GitHub organization (e.g., `mycompany-factory`)
+   - Fork/clone the SpecWorks factory template repository
+   - Customize conventions for your domain
+
+2. **Set Up Infrastructure**
+   - Create `.github` repository for shared workflow templates
+   - Deploy an xRegistry instance to catalog your Parts
+   - Configure the xRegistry resource type for Parts (Section 6)
+
+3. **Create Your First Part**
+   - Create a repository for the Part (e.g., `mycompany-factory/oauth2`)
+   - Use templates from factory repository
+   - Implement specification(s) in one or more languages
+   - Create linkset descriptor (specs.json)
+   - Ensure Part satisfies requirements in Section 3.2
+
+4. **Register in xRegistry**
+   - Add Part entry to your xRegistry instance
+   - Publish linkset descriptor
+   - Verify all required links are present
+
+5. **Publish Implementations**
+   - Publish libraries to package managers (NuGet, PyPI, etc.)
+   - Configure CI/CD using shared workflow templates
+   - Set up automated testing and validation
+
+### Factory Scope Examples
 
 Your factory can focus on any domain:
-- Industry-specific standards
-- Internal company specifications
-- Protocol implementations
-- Data format libraries
+- **Industry-specific standards**: Financial protocols (ISO 20022), Healthcare (HL7 FHIR)
+- **Internal specifications**: Company-specific APIs and data formats
+- **Protocol implementations**: Network protocols (RFCs), authentication standards
+- **Data format libraries**: File formats (PDF, DOCX), serialization formats
+
+### Multi-Repository Pattern Benefits
+
+The multi-repository pattern is particularly beneficial for:
+- **AI-agent-driven development**: Multiple agents working in parallel without conflicts
+- **Specification-centric discovery**: Each repository represents one problem space
+- **Independent evolution**: Parts evolve based on their specification's lifecycle
+- **Focused contributions**: Contributors clone only the Part they need
+
+See [ADR 0001](adr/0001-multi-repo-organization.md) for detailed architectural rationale.

@@ -4,7 +4,7 @@
   "name": "SpecWorks Factory Inventory",
   "description": "Catalog of specification-based software components",
   "epoch": 1,
-  "self": "https://registry.specworks.org/",
+  "self": "https://spec-works.github.io/registry/",
   "model": {
     "schemas": [
       "xRegistry-json"
@@ -23,7 +23,7 @@
       }
     }
   },
-  "partsurl": "https://registry.specworks.org/parts",
+  "partsurl": "https://spec-works.github.io/registry/parts",
   "partscount": 4,
   "parts": {
     "linkset": {
@@ -31,17 +31,17 @@
       "name": "Linkset Component",
       "description": "Library for working with RFC 9264 linksets",
       "epoch": 1,
-      "self": "https://registry.specworks.org/parts/linkset",
+      "self": "https://spec-works.github.io/registry/parts/linkset",
       "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://registry.specworks.org/parts/linkset/versions/1.0.0",
-      "versionsurl": "https://registry.specworks.org/parts/linkset/versions",
+      "defaultversionurl": "https://spec-works.github.io/registry/parts/linkset/versions/1.0.0",
+      "versionsurl": "https://spec-works.github.io/registry/parts/linkset/versions",
       "versionscount": 1,
       "versions": {
         "1.0.0": {
           "id": "1.0.0",
           "epoch": 1,
-          "self": "https://registry.specworks.org/parts/linkset/versions/1.0.0",
-          "parturl": "https://registry.specworks.org/parts/linkset/versions/1.0.0/part",
+          "self": "https://spec-works.github.io/registry/parts/linkset/versions/1.0.0",
+          "parturl": "https://spec-works.github.io/registry/parts/linkset/versions/1.0.0/part",
           "contenttype": "application/linkset+json"
         }
       }
@@ -51,17 +51,17 @@
       "name": "iCalendar Component",
       "description": "Library for parsing and generating iCalendar (RFC 5545) data",
       "epoch": 1,
-      "self": "https://registry.specworks.org/parts/icalendar",
+      "self": "https://spec-works.github.io/registry/parts/icalendar",
       "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://registry.specworks.org/parts/icalendar/versions/1.0.0",
-      "versionsurl": "https://registry.specworks.org/parts/icalendar/versions",
+      "defaultversionurl": "https://spec-works.github.io/registry/parts/icalendar/versions/1.0.0",
+      "versionsurl": "https://spec-works.github.io/registry/parts/icalendar/versions",
       "versionscount": 1,
       "versions": {
         "1.0.0": {
           "id": "1.0.0",
           "epoch": 1,
-          "self": "https://registry.specworks.org/parts/icalendar/versions/1.0.0",
-          "parturl": "https://registry.specworks.org/parts/icalendar/versions/1.0.0/part",
+          "self": "https://spec-works.github.io/registry/parts/icalendar/versions/1.0.0",
+          "parturl": "https://spec-works.github.io/registry/parts/icalendar/versions/1.0.0/part",
           "contenttype": "application/linkset+json"
         }
       }
@@ -71,17 +71,17 @@
       "name": "MarkMyWord Component",
       "description": "Markdown processing library",
       "epoch": 1,
-      "self": "https://registry.specworks.org/parts/markmyword",
+      "self": "https://spec-works.github.io/registry/parts/markmyword",
       "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://registry.specworks.org/parts/markmyword/versions/1.0.0",
-      "versionsurl": "https://registry.specworks.org/parts/markmyword/versions",
+      "defaultversionurl": "https://spec-works.github.io/registry/parts/markmyword/versions/1.0.0",
+      "versionsurl": "https://spec-works.github.io/registry/parts/markmyword/versions",
       "versionscount": 1,
       "versions": {
         "1.0.0": {
           "id": "1.0.0",
           "epoch": 1,
-          "self": "https://registry.specworks.org/parts/markmyword/versions/1.0.0",
-          "parturl": "https://registry.specworks.org/parts/markmyword/versions/1.0.0/part",
+          "self": "https://spec-works.github.io/registry/parts/markmyword/versions/1.0.0",
+          "parturl": "https://spec-works.github.io/registry/parts/markmyword/versions/1.0.0/part",
           "contenttype": "application/linkset+json"
         }
       }
@@ -91,20 +91,21 @@
       "name": "RateLimiter Component",
       "description": "HTTP rate limiting library implementing IETF draft specifications",
       "epoch": 1,
-      "self": "https://registry.specworks.org/parts/ratelimiter",
+      "self": "https://spec-works.github.io/registry/parts/ratelimiter",
       "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://registry.specworks.org/parts/ratelimiter/versions/1.0.0",
-      "versionsurl": "https://registry.specworks.org/parts/ratelimiter/versions",
+      "defaultversionurl": "https://spec-works.github.io/registry/parts/ratelimiter/versions/1.0.0",
+      "versionsurl": "https://spec-works.github.io/registry/parts/ratelimiter/versions",
       "versionscount": 1,
       "versions": {
         "1.0.0": {
           "id": "1.0.0",
           "epoch": 1,
-          "self": "https://registry.specworks.org/parts/ratelimiter/versions/1.0.0",
-          "parturl": "https://registry.specworks.org/parts/ratelimiter/versions/1.0.0/part",
+          "self": "https://spec-works.github.io/registry/parts/ratelimiter/versions/1.0.0",
+          "parturl": "https://spec-works.github.io/registry/parts/ratelimiter/versions/1.0.0/part",
           "contenttype": "application/linkset+json"
         }
       }
     }
   }
 }
+
