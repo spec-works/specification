@@ -1,108 +1,271 @@
 {
-  "specversion": "0.5",
-  "id": "specworks-factory",
-  "name": "SpecWorks Factory Inventory",
-  "description": "Catalog of specification-based software components",
+  "specversion": "1.0-rc2",
+  "registryid": "specworks-factory",
+  "name": "SpecWorks Factory Component Registry",
+  "description": "Software Component Registry for specification-based components produced by SpecWorks factory",
+  "documentation": "https://github.com/spec-works/specification/blob/main/component-spec.md",
   "epoch": 1,
   "self": "https://spec-works.github.io/registry/",
+  "xid": "/",
+  "createdat": "2024-01-01T00:00:00Z",
+  "modifiedat": "2024-01-26T00:00:00Z",
   "model": {
-    "schemas": [
-      "xRegistry-json"
-    ],
+    "schemas": ["xRegistry-json"],
+    "attributes": {
+      "specversion": {
+        "name": "specversion",
+        "type": "string",
+        "description": "The version of the xRegistry specification",
+        "required": true,
+        "immutable": true
+      }
+    },
     "groups": {
-      "*": {
-        "plural": "parts",
-        "singular": "part",
+      "componentgroups": {
+        "plural": "componentgroups",
+        "singular": "componentgroup",
+        "attributes": {
+          "owner": {
+            "name": "owner",
+            "type": "string",
+            "description": "The owner of the component group"
+          },
+          "namespace": {
+            "name": "namespace",
+            "type": "string",
+            "description": "A namespace qualifier for components in this group"
+          }
+        },
         "resources": {
-          "*": {
-            "plural": "versions",
-            "singular": "version",
-            "versions": 1
+          "components": {
+            "plural": "components",
+            "singular": "component",
+            "versions": 10,
+            "versionid": true,
+            "attributes": {
+              "componenttype": {
+                "name": "componenttype",
+                "type": "string",
+                "description": "Type of software component"
+              },
+              "language": {
+                "name": "language",
+                "type": "string",
+                "description": "Primary programming language"
+              },
+              "framework": {
+                "name": "framework",
+                "type": "string",
+                "description": "Primary framework or runtime"
+              },
+              "license": {
+                "name": "license",
+                "type": "string",
+                "description": "Software license identifier"
+              },
+              "repository": {
+                "name": "repository",
+                "type": "url",
+                "description": "Source code repository URL"
+              },
+              "homepage": {
+                "name": "homepage",
+                "type": "url",
+                "description": "Component homepage URL"
+              },
+              "keywords": {
+                "name": "keywords",
+                "type": "array",
+                "item": {"type": "string"},
+                "description": "Keywords for categorization"
+              },
+              "dependencies": {
+                "name": "dependencies",
+                "type": "array",
+                "item": {"type": "object"},
+                "description": "Component dependencies"
+              },
+              "artifacts": {
+                "name": "artifacts",
+                "type": "array",
+                "item": {"type": "object"},
+                "description": "Component artifacts"
+              },
+              "buildinfo": {
+                "name": "buildinfo",
+                "type": "object",
+                "description": "Build and factory information"
+              },
+              "status": {
+                "name": "status",
+                "type": "string",
+                "description": "Lifecycle status"
+              },
+              "maturity": {
+                "name": "maturity",
+                "type": "string",
+                "description": "Maturity level"
+              }
+            }
           }
         }
       }
     }
   },
-  "partsurl": "https://spec-works.github.io/registry/parts",
-  "partscount": 4,
-  "parts": {
-    "linkset": {
-      "id": "linkset",
-      "name": "Linkset Component",
-      "description": "Library for working with RFC 9264 linksets",
+  "componentgroupsurl": "https://spec-works.github.io/registry/componentgroups",
+  "componentgroupscount": 1,
+  "componentgroups": {
+    "specification-libs": {
+      "componentgroupid": "specification-libs",
+      "name": "Specification-Based Libraries",
+      "description": "Libraries implementing IETF, W3C, and other standard specifications",
       "epoch": 1,
-      "self": "https://spec-works.github.io/registry/parts/linkset",
-      "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://spec-works.github.io/registry/parts/linkset/versions/1.0.0",
-      "versionsurl": "https://spec-works.github.io/registry/parts/linkset/versions",
-      "versionscount": 1,
-      "versions": {
-        "1.0.0": {
-          "id": "1.0.0",
+      "self": "https://spec-works.github.io/registry/componentgroups/specification-libs",
+      "xid": "/componentgroups/specification-libs",
+      "owner": "SpecWorks Factory",
+      "namespace": "spec-works",
+      "createdat": "2024-01-01T00:00:00Z",
+      "modifiedat": "2024-01-26T00:00:00Z",
+      "componentsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components",
+      "componentscount": 6,
+      "components": {
+        "linkset": {
+          "componentid": "linkset",
+          "versionid": "1.0.0",
+          "name": "Linkset",
+          "description": "Software component for parsing and serializing linkset documents (application/linkset+json)",
+          "documentation": "https://github.com/spec-works/linkset",
           "epoch": 1,
-          "self": "https://spec-works.github.io/registry/parts/linkset/versions/1.0.0",
-          "parturl": "https://spec-works.github.io/registry/parts/linkset/versions/1.0.0/part",
-          "contenttype": "application/linkset+json"
-        }
-      }
-    },
-    "icalendar": {
-      "id": "icalendar",
-      "name": "iCalendar Component",
-      "description": "Library for parsing and generating iCalendar (RFC 5545) data",
-      "epoch": 1,
-      "self": "https://spec-works.github.io/registry/parts/icalendar",
-      "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://spec-works.github.io/registry/parts/icalendar/versions/1.0.0",
-      "versionsurl": "https://spec-works.github.io/registry/parts/icalendar/versions",
-      "versionscount": 1,
-      "versions": {
-        "1.0.0": {
-          "id": "1.0.0",
+          "self": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/linkset",
+          "xid": "/componentgroups/specification-libs/components/linkset",
+          "createdat": "2024-01-01T00:00:00Z",
+          "modifiedat": "2024-01-26T00:00:00Z",
+          "componenttype": "library",
+          "language": "csharp",
+          "framework": "dotnet",
+          "license": "MIT",
+          "repository": "https://github.com/spec-works/linkset",
+          "homepage": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/linkset",
+          "keywords": ["linkset", "rfc9264", "web-linking", "hypermedia"],
+          "status": "active",
+          "maturity": "stable",
+          "versionsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/linkset/versions",
+          "versionscount": 1
+        },
+        "icalendar": {
+          "componentid": "icalendar",
+          "versionid": "1.0.0",
+          "name": "iCalendar",
+          "description": "Software component for parsing, validating, and serializing iCalendar (text/calendar) data",
+          "documentation": "https://github.com/spec-works/iCalendar",
           "epoch": 1,
-          "self": "https://spec-works.github.io/registry/parts/icalendar/versions/1.0.0",
-          "parturl": "https://spec-works.github.io/registry/parts/icalendar/versions/1.0.0/part",
-          "contenttype": "application/linkset+json"
-        }
-      }
-    },
-    "markmyword": {
-      "id": "markmyword",
-      "name": "MarkMyWord Component",
-      "description": "Markdown processing library",
-      "epoch": 1,
-      "self": "https://spec-works.github.io/registry/parts/markmyword",
-      "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://spec-works.github.io/registry/parts/markmyword/versions/1.0.0",
-      "versionsurl": "https://spec-works.github.io/registry/parts/markmyword/versions",
-      "versionscount": 1,
-      "versions": {
-        "1.0.0": {
-          "id": "1.0.0",
+          "self": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/icalendar",
+          "xid": "/componentgroups/specification-libs/components/icalendar",
+          "createdat": "2024-01-01T00:00:00Z",
+          "modifiedat": "2024-01-26T00:00:00Z",
+          "componenttype": "library",
+          "language": "csharp",
+          "framework": "dotnet",
+          "license": "MIT",
+          "repository": "https://github.com/spec-works/iCalendar",
+          "homepage": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/icalendar",
+          "keywords": ["icalendar", "rfc5545", "calendar", "scheduling"],
+          "status": "active",
+          "maturity": "stable",
+          "versionsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/icalendar/versions",
+          "versionscount": 1
+        },
+        "markmyword": {
+          "componentid": "markmyword",
+          "versionid": "1.0.0",
+          "name": "MarkMyWord",
+          "description": "Software component for bidirectional conversion between CommonMark/GitHub Flavored Markdown and Microsoft Word (.docx) documents",
+          "documentation": "https://github.com/spec-works/MarkMyWord",
           "epoch": 1,
-          "self": "https://spec-works.github.io/registry/parts/markmyword/versions/1.0.0",
-          "parturl": "https://spec-works.github.io/registry/parts/markmyword/versions/1.0.0/part",
-          "contenttype": "application/linkset+json"
-        }
-      }
-    },
-    "ratelimiter": {
-      "id": "ratelimiter",
-      "name": "RateLimiter Component",
-      "description": "HTTP rate limiting library implementing IETF draft specifications",
-      "epoch": 1,
-      "self": "https://spec-works.github.io/registry/parts/ratelimiter",
-      "defaultversionid": "1.0.0",
-      "defaultversionurl": "https://spec-works.github.io/registry/parts/ratelimiter/versions/1.0.0",
-      "versionsurl": "https://spec-works.github.io/registry/parts/ratelimiter/versions",
-      "versionscount": 1,
-      "versions": {
-        "1.0.0": {
-          "id": "1.0.0",
+          "self": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/markmyword",
+          "xid": "/componentgroups/specification-libs/components/markmyword",
+          "createdat": "2024-01-01T00:00:00Z",
+          "modifiedat": "2024-01-26T00:00:00Z",
+          "componenttype": "library",
+          "language": "csharp",
+          "framework": "dotnet",
+          "license": "MIT",
+          "repository": "https://github.com/spec-works/MarkMyWord",
+          "homepage": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/markmyword",
+          "keywords": ["markdown", "commonmark", "word", "docx", "openxml"],
+          "status": "active",
+          "maturity": "stable",
+          "versionsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/markmyword/versions",
+          "versionscount": 1
+        },
+        "ratelimiter": {
+          "componentid": "ratelimiter",
+          "versionid": "1.0.0",
+          "name": "RateLimiter",
+          "description": "Software component for client-side rate limiting and traffic shaping based on HTTP rate limit headers",
+          "documentation": "https://github.com/spec-works/RateLimiter",
           "epoch": 1,
-          "self": "https://spec-works.github.io/registry/parts/ratelimiter/versions/1.0.0",
-          "parturl": "https://spec-works.github.io/registry/parts/ratelimiter/versions/1.0.0/part",
-          "contenttype": "application/linkset+json"
+          "self": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/ratelimiter",
+          "xid": "/componentgroups/specification-libs/components/ratelimiter",
+          "createdat": "2024-01-01T00:00:00Z",
+          "modifiedat": "2024-01-26T00:00:00Z",
+          "componenttype": "library",
+          "language": "csharp",
+          "framework": "dotnet",
+          "license": "MIT",
+          "repository": "https://github.com/spec-works/RateLimiter",
+          "homepage": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/ratelimiter",
+          "keywords": ["rate-limiting", "http", "ratelimit-headers", "traffic-shaping"],
+          "status": "active",
+          "maturity": "stable",
+          "versionsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/ratelimiter/versions",
+          "versionscount": 1
+        },
+        "vcard": {
+          "componentid": "vcard",
+          "versionid": "1.0.0",
+          "name": "vCard",
+          "description": "Software component for parsing, validating, and serializing vCard data",
+          "documentation": "https://github.com/spec-works/vCard",
+          "epoch": 1,
+          "self": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/vcard",
+          "xid": "/componentgroups/specification-libs/components/vcard",
+          "createdat": "2024-01-01T00:00:00Z",
+          "modifiedat": "2024-01-26T00:00:00Z",
+          "componenttype": "library",
+          "language": "csharp",
+          "framework": "dotnet",
+          "license": "MIT",
+          "repository": "https://github.com/spec-works/vCard",
+          "homepage": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/vcard",
+          "keywords": ["vcard", "rfc6350", "contacts", "address-book"],
+          "status": "active",
+          "maturity": "stable",
+          "versionsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/vcard/versions",
+          "versionscount": 1
+        },
+        "jsondiff": {
+          "componentid": "jsondiff",
+          "versionid": "1.0.0",
+          "name": "JsonDiff",
+          "description": "Software component for generating JSON Patch (RFC 6902) documents by comparing two JSON objects",
+          "documentation": "https://github.com/spec-works/JsonDiff",
+          "epoch": 1,
+          "self": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/jsondiff",
+          "xid": "/componentgroups/specification-libs/components/jsondiff",
+          "createdat": "2024-01-01T00:00:00Z",
+          "modifiedat": "2024-01-26T00:00:00Z",
+          "componenttype": "library",
+          "language": "csharp",
+          "framework": "dotnet",
+          "license": "MIT",
+          "repository": "https://github.com/spec-works/JsonDiff",
+          "homepage": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/jsondiff",
+          "keywords": ["json", "json-patch", "rfc6902", "diff"],
+          "status": "active",
+          "maturity": "stable",
+          "versionsurl": "https://spec-works.github.io/registry/componentgroups/specification-libs/components/jsondiff/versions",
+          "versionscount": 1
         }
       }
     }
